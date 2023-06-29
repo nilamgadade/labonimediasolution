@@ -1,0 +1,55 @@
+<!-- <p>crud-application works!</p> -->
+
+<div class="container-fluid">
+
+    <form name="myForm" #frm="ngForm">
+        <div class="form-group mb-3">
+            <label for="id"><b>ID</b></label>
+            <input type="number" name="id" class="form-control" #id="ngModel" [(ngModel)]="id1" required ngModel>
+        </div>
+        <br> 
+
+        <div class="form-group mb-3">
+            <label for="name"><b>Name</b><span style="color: red;">*</span></label>
+            <input type="text" name="name" class="form-control" #name="ngModel" [(ngModel)]="fn" required ngModel
+                [ngClass]="{'is-invalid':frm.submitted && name.invalid}">
+            <div *ngIf="frm.submitted && name.invalid" class="invalid-feedback">
+                Name is Required
+            </div>
+        </div>
+        <br>
+
+        <div class="form-group mb-3">
+            <label for="job"><b>Phone-No</b></label>
+            <input type="text" name="phone" class="form-control" #phone="ngModel" [(ngModel)]="phn" required ngModel>
+        </div>
+        <br>
+        <div>
+            <button class="btn btn-success" (click)=" onSubmitForm(frm)"
+                ngSubmit="myForm.form.vaild && onSubmit(myForm)">submit</button> &nbsp;
+            <button type="reset" class="btn btn-primary">Reset</button> &nbsp;
+            <button class="btn btn-primary" (click)="updateData(frm)">Update</button>
+        </div>
+    
+    </form>
+    
+    
+    <!-- Table -->
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Phone-No</th>
+                <th colspan="2">Button</th>
+            </tr>
+            <tr *ngFor="let dat of  data; index as i">
+                <td>{{dat.id}}</td>
+                <td>{{dat.name}}</td>
+                <td>{{dat.phone}}</td>
+    
+                <td><button class="btn btn-warning" (click)=" deletedData(dat)">Delete</button></td>
+                <td><button class="btn btn-warning" (click)="onEdit(dat)">Edit</button></td>
+            </tr>
+        </table>
+    
+    </div>
